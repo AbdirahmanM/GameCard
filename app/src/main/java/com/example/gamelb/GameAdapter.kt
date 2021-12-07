@@ -1,5 +1,6 @@
 package com.example.gamelb
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
     class MyViewHolder(v: View): RecyclerView.ViewHolder(v) {
         val img: ImageView = v.findViewById(R.id.game_img)
         val title: TextView = v.findViewById(R.id.game_title)
+        val view: View = v
     }
 
 
@@ -27,6 +29,12 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
         var game: Game = games.get(position)
         holder.title.text = game.name
         Picasso.get().load(game.background_image).fit().centerCrop().into(holder.img)
+
+        holder.view.setOnClickListener {
+            val intent = Intent(it.context,GameDetailActivity::class.java)
+            intent.putExtra("EXTRA_GAME", game)
+            it.context.startActivity(intent)
+        }
 
     }
 
