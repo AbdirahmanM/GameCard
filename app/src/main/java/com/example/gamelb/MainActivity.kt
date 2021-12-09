@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var gameHandler = GameHandler(BASEURL)
-        gameHandler.getAllGames(API_KEY)
+        gameHandler.getAllGames(BuildConfig.API_KEY)
         val myAdapter = GameAdapter()
         val recyclerview: RecyclerView = findViewById(R.id.recyclerview_explore_games)
         recyclerview.adapter = myAdapter
@@ -33,6 +33,5 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var BASEURL = "https://api.rawg.io/api/"
-        var API_KEY = "fb50857a1f804befa8d3d897534ce135"
     }
 }

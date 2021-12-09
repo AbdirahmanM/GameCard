@@ -20,25 +20,12 @@ class GameDetailActivity : AppCompatActivity() {
         var genres: TextView = findViewById(R.id.genres)
         val stores: TextView = findViewById(R.id.stores)
         name.text = game.name
-        released.text = "Released: ${game.released}"
+        released.text = "Released: ${formatDate(game.released)}"
         rating.text = "Rating: ${game.rating}"
         playtime.text = "Average playtime: ${game.playtime} HOURS"
         platforms.text = "Platforms: ${convertListOfObjectsToString(game.parent_platforms.map{it.platform})}"
         genres.text = "Genres: ${convertListOfObjectsToString(game.genres)}"
         stores.text = "Buy the game on: ${convertListOfObjectsToString(game.stores.map{it.store})}"
         Picasso.get().load(game.background_image).fit().centerCrop().into(img)
-    }
-
-
-    fun convertListOfObjectsToString(list: List<Any>): String{
-        val object_names: MutableList<String> = mutableListOf()
-        list.forEach {
-            when(it){
-                is Platform -> object_names.add(it.name)
-                is Genre -> object_names.add(it.name)
-                is Store -> object_names.add(it.name)
-            }
-        }
-        return object_names.joinToString(", ")
     }
 }

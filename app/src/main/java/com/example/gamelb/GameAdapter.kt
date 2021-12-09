@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 
@@ -16,7 +17,7 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
     class MyViewHolder(v: View): RecyclerView.ViewHolder(v) {
         val img: ImageView = v.findViewById(R.id.game_img)
         val title: TextView = v.findViewById(R.id.game_title)
-        val view: View = v
+        val cardView: CardView = v.findViewById(R.id.cardView)
     }
 
 
@@ -30,7 +31,7 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
         holder.title.text = game.name
         Picasso.get().load(game.background_image).fit().centerCrop().into(holder.img)
 
-        holder.view.setOnClickListener {
+        holder.cardView.setOnClickListener {
             val intent = Intent(it.context,GameDetailActivity::class.java)
             intent.putExtra("EXTRA_GAME", game)
             it.context.startActivity(intent)
