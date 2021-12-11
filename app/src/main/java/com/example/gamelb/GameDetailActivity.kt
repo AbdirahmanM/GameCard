@@ -12,6 +12,7 @@ class GameDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game_detail)
         val game = intent.getSerializableExtra("EXTRA_GAME") as Game
         val name: TextView = findViewById(R.id.name)
+        setTitle(game.name)
         val released: TextView = findViewById(R.id.released)
         val rating: TextView = findViewById(R.id.rating)
         val img: ImageView = findViewById(R.id.img)

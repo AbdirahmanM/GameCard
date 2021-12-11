@@ -16,15 +16,17 @@ class GameHandler(url: String) {
         .build()
 
     val games: MutableLiveData<List<Game>> = MutableLiveData<List<Game>>()
+    val nextUrl: MutableLiveData<String> = MutableLiveData("")
 
-    fun getAllGames(api_key: String){
+    fun getAllGames(api_key: String, page: Int?){
         val service = retrofit.create(GameService::class.java)
-        var call = service.getGameData(api_key)
+        val call = service.getGameData(api_key,page)
         call.enqueue(object : Callback<GameResponse> {
             override fun onResponse(call: Call<GameResponse>, response: Response<GameResponse>) {
                 if (response.code() == 200) {
-                    val game_response = response.body()!!
-                    games.setValue(game_response.results);
+                    val gameResponse = response.body()!!
+                    nextUrl.postValue(gameResponse.next)
+                    games.postValue(listOf(games.value.orEmpty(),gameResponse.results).flatten())
                 }
             }
 
