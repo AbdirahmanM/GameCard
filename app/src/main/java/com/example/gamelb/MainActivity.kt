@@ -2,7 +2,6 @@ package com.example.gamelb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
@@ -28,21 +27,56 @@ class MainActivity : AppCompatActivity() {
         val upcomingGamesFragment = UpcomingGamesFragment()
         val myListFragment = MyListFragment()
         navigationView.setNavigationItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.nav_upcoming_games -> supportFragmentManager.beginTransaction().apply {
+                    setMenuItemAsChecked(it.itemId)
                     replace(R.id.flFragment, upcomingGamesFragment)
                     commit()
+                    drawerLayout.closeDrawers()
                 }
                 R.id.nav_explore_games -> supportFragmentManager.beginTransaction().apply {
+                    setMenuItemAsChecked(it.itemId)
                     replace(R.id.flFragment, exploreGamesFragment)
                     commit()
+                    drawerLayout.closeDrawers()
+
                 }
                 R.id.nav_my_list -> supportFragmentManager.beginTransaction().apply {
+                    setMenuItemAsChecked(it.itemId)
                     replace(R.id.flFragment, myListFragment)
                     commit()
+                    drawerLayout.closeDrawers()
                 }
             }
             true
+        }
+
+        // when the application starts the exploreFragment is showed automatically and the explore games menu item is checked
+        navigationView.menu.findItem(R.id.nav_explore_games).isChecked = true
+        supportFragmentManager.beginTransaction().apply {
+            replace(R.id.flFragment, exploreGamesFragment)
+            commit()
+        }
+    }
+
+    // when one item is checked uncheck the others
+    fun setMenuItemAsChecked(id: Int){
+        when(id){
+            R.id.nav_explore_games -> {
+                navigationView.menu.findItem(R.id.nav_explore_games).isChecked = true
+                navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = false
+                navigationView.menu.findItem(R.id.nav_my_list).isChecked = false
+            }
+            R.id.nav_upcoming_games -> {
+                navigationView.menu.findItem(R.id.nav_explore_games).isChecked = false
+                navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = true
+                navigationView.menu.findItem(R.id.nav_my_list).isChecked = false
+            }
+            R.id.nav_my_list -> {
+                navigationView.menu.findItem(R.id.nav_explore_games).isChecked = false
+                navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = false
+                navigationView.menu.findItem(R.id.nav_my_list).isChecked = true
+            }
         }
     }
 

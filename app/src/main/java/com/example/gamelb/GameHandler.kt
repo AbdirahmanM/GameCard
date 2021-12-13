@@ -16,7 +16,9 @@ class GameHandler(url: String) {
         .build()
 
     val games: MutableLiveData<List<Game>> = MutableLiveData<List<Game>>()
+    val upcomingGames: MutableLiveData<List<Game>> = MutableLiveData<List<Game>>()
     val nextUrl: MutableLiveData<String> = MutableLiveData("")
+    val upcomingNextUrl: MutableLiveData<String> = MutableLiveData("")
 
     fun getAllGames(api_key: String, page: Int?){
         val service = retrofit.create(GameService::class.java)
@@ -30,6 +32,23 @@ class GameHandler(url: String) {
                 }
             }
 
+            override fun onFailure(call: Call<GameResponse>, t: Throwable) {
+                Log.e("GameHandler","Something went wrong")
+            }
+        })
+    }
+
+    fun getUpcomingGames(api_key: String,dates: String, page: Int?){
+        val service = retrofit.create(GameService::class.java)
+        val call = service.getGamesInDateRange(api_key,dates,page)
+        call.enqueue(object : Callback<GameResponse> {
+            override fun onResponse(call: Call<GameResponse>, response: Response<GameResponse>) {
+                if (response.code() == 200) {
+                    val gameResponse = response.body()!!
+                    upcomingNextUrl.postValue(gameResponse.next)
+                    upcomingGames.postValue(listOf(upcomingGames.value.orEmpty(),gameResponse.results).flatten())
+                }
+            }
             override fun onFailure(call: Call<GameResponse>, t: Throwable) {
                 Log.e("GameHandler","Something went wrong")
             }
