@@ -1,15 +1,16 @@
 package com.example.gamelb
 
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface GameEntityDAO {
     @Query("SELECT * FROM games")
-    fun getAllGames(): List<GameEntity>
+    fun getAllGames(): Flow<List<GameEntity>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun addGame(gameEntity: GameEntity)
+    suspend fun addGame(gameEntity: GameEntity)
 
     @Delete
-    fun delete(gameEntity: GameEntity)
+    suspend fun delete(gameEntity: GameEntity)
 }

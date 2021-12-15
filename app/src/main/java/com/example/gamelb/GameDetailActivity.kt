@@ -2,23 +2,27 @@ package com.example.gamelb
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.LinearLayout
+import android.widget.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.flexbox.FlexboxLayout
 
 
 class GameDetailActivity : AppCompatActivity() {
+
+    lateinit var viewmodel: GameEntityViewModel
+    lateinit var game: Game
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
-        val game = intent.getSerializableExtra("EXTRA_GAME") as Game
+        viewmodel = ViewModelProvider(this).get(GameEntityViewModel::class.java)
+        game = intent.getSerializableExtra("EXTRA_GAME") as Game
         setTitle(game.name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
         val released: TextView = findViewById(R.id.released)
@@ -52,5 +56,27 @@ class GameDetailActivity : AppCompatActivity() {
             }
         }
     }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.game_detail_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.saveGame -> {
+                addGameToDb()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun addGameToDb() {
+        val gameEntity: GameEntity = GameEntity(0, game.id,game.slug,game.name, game.released,
+        game.tba, game.background_image, game.rating, game.parent_platforms,game.stores,game.genres,game.playtime)
+        viewmodel.insert(gameEntity)
+        Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
+    }
+
 
 }

@@ -3,10 +3,12 @@ package com.example.gamelb
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+
 @Entity(tableName = "games")
 data class GameEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
+    var game_id: Int,
     var slug: String,
     var name: String,
     var released: String,
