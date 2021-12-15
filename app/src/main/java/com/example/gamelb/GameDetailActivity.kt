@@ -8,6 +8,8 @@ import android.widget.TextView
 import com.squareup.picasso.Picasso
 import android.content.Intent
 import android.net.Uri
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.LinearLayout
 import com.google.android.flexbox.FlexboxLayout
 
@@ -18,6 +20,7 @@ class GameDetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game_detail)
         val game = intent.getSerializableExtra("EXTRA_GAME") as Game
         setTitle(game.name)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true);
         val released: TextView = findViewById(R.id.released)
         val rating: TextView = findViewById(R.id.rating)
         val img: ImageView = findViewById(R.id.img)
@@ -49,4 +52,5 @@ class GameDetailActivity : AppCompatActivity() {
             }
         }
     }
+
 }

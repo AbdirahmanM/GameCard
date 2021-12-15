@@ -34,6 +34,7 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
         holder.cardView.setOnClickListener {
             val intent = Intent(it.context,GameDetailActivity::class.java)
             intent.putExtra("EXTRA_GAME", game)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             it.context.startActivity(intent)
         }
 

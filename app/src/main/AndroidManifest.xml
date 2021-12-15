@@ -13,6 +13,7 @@
         android:theme="@style/Theme.Gamelb">
         <activity
             android:name=".GameDetailActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"

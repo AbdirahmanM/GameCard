@@ -18,8 +18,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         drawerLayout = findViewById(R.id.drawer_layout)
         navigationView = findViewById(R.id.nav_view)
-        actionBarDrawerToggle =
-            ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
+        actionBarDrawerToggle = ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close)
         drawerLayout.addDrawerListener(actionBarDrawerToggle)
         actionBarDrawerToggle.syncState()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
