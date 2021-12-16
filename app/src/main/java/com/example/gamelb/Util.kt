@@ -1,5 +1,9 @@
 package com.example.gamelb
 
+import com.example.gamelb.api.models.Genre
+import com.example.gamelb.api.models.Platform
+import com.example.gamelb.api.models.Store
+
 fun convertListOfObjectsToString(list: List<Any>): String{
     val object_names: MutableList<String> = mutableListOf()
     list.forEach {

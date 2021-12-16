@@ -1,4 +1,4 @@
-package com.example.gamelb
+package com.example.gamelb.db
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow

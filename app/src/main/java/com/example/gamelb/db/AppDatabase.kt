@@ -1,4 +1,4 @@
-package com.example.gamelb
+package com.example.gamelb.db
 
 import android.content.Context
 import androidx.room.Database

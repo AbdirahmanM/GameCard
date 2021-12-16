@@ -1,4 +1,4 @@
-package com.example.gamelb
+package com.example.gamelb.db
 
 import androidx.annotation.WorkerThread
 import kotlinx.coroutines.flow.Flow

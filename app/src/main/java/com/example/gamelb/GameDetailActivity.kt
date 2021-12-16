@@ -9,20 +9,24 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
 import androidx.activity.viewModels
+import com.example.gamelb.api.models.Game
+import com.example.gamelb.db.*
 import com.google.android.flexbox.FlexboxLayout
 
 
 class GameDetailActivity : AppCompatActivity() {
 
-    val gameEntityViewModel: GameEntityViewModel by viewModels {
-        GameEntityViewModelFactory((application as GameDBApplication).repository)
-    }
-
+    lateinit var db : AppDatabase
+    lateinit var repository: GameEntityRepository
+    lateinit var gameEntityViewModel: GameEntityViewModel
     lateinit var game: Game
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
+        db  = AppDatabase.getDatabase(applicationContext)
+        repository = GameEntityRepository(db.gameEntityDAO())
+        gameEntityViewModel = GameEntityViewModel(repository)
         game = intent.getSerializableExtra("EXTRA_GAME") as Game
         setTitle(game.name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);

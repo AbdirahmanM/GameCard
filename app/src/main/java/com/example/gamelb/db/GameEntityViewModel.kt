@@ -1,4 +1,4 @@
-package com.example.gamelb
+package com.example.gamelb.db
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel

@@ -1,4 +1,4 @@
-package com.example.gamelb
+package com.example.gamelb.api.models
 
 import java.io.Serializable
 

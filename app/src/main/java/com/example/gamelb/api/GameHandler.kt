@@ -1,7 +1,9 @@
-package com.example.gamelb
+package com.example.gamelb.api
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.gamelb.api.models.Game
+import com.example.gamelb.api.models.GameResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

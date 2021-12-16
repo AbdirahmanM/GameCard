@@ -1,4 +1,4 @@
-package com.example.gamelb
+package com.example.gamelb.adapters
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gamelb.api.models.Game
+import com.example.gamelb.GameDetailActivity
+import com.example.gamelb.R
 import com.squareup.picasso.Picasso
 
 class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
@@ -32,7 +35,7 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
         Picasso.get().load(game.background_image).fit().centerCrop().into(holder.img)
 
         holder.cardView.setOnClickListener {
-            val intent = Intent(it.context,GameDetailActivity::class.java)
+            val intent = Intent(it.context, GameDetailActivity::class.java)
             intent.putExtra("EXTRA_GAME", game)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             it.context.startActivity(intent)

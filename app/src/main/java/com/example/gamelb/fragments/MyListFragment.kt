@@ -1,15 +1,17 @@
-package com.example.gamelb
+package com.example.gamelb.fragments
 
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
-import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.gamelb.GameDBApplication
+import com.example.gamelb.R
+import com.example.gamelb.adapters.GameEntityAdapter
+import com.example.gamelb.db.*
 
 
 /**
@@ -20,10 +22,6 @@ import androidx.recyclerview.widget.RecyclerView
 class MyListFragment : Fragment(R.layout.fragment_my_list) {
 
 
-    val gameEntityViewModel: GameEntityViewModel by viewModels {
-        GameEntityViewModelFactory((activity?.applicationContext as GameDBApplication).repository)
-    }
-
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var progressBar: ProgressBar
 
@@ -31,6 +29,9 @@ class MyListFragment : Fragment(R.layout.fragment_my_list) {
         super.onViewCreated(view, savedInstanceState)
         val view: View? = getView()
         progressBar = view?.findViewById(R.id.progress)!!
+        val db : AppDatabase = AppDatabase.getDatabase(requireActivity().application)
+        val repository = GameEntityRepository(db.gameEntityDAO())
+        val gameEntityViewModel = GameEntityViewModel(repository)
         val myAdapter = GameEntityAdapter()
         val recyclerview: RecyclerView = view.findViewById(R.id.recyclerview_explore_games)!!
         recyclerview.adapter = myAdapter

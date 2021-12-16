@@ -1,5 +1,8 @@
 package com.example.gamelb
 
+import com.example.gamelb.api.models.Genre
+import com.example.gamelb.api.models.Platform
+import com.example.gamelb.api.models.Store
 import org.junit.Test
 
 import org.junit.Assert.*

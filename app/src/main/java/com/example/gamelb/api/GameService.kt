@@ -1,5 +1,6 @@
-package com.example.gamelb
+package com.example.gamelb.api
 
+import com.example.gamelb.api.models.GameResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

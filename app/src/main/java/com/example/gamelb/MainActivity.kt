@@ -3,14 +3,14 @@ package com.example.gamelb
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.viewModels
+import com.example.gamelb.fragments.ExploreGamesFragment
+import com.example.gamelb.fragments.MyListFragment
+import com.example.gamelb.fragments.UpcomingGamesFragment
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
-
 
     lateinit var drawerLayout: DrawerLayout
     lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
