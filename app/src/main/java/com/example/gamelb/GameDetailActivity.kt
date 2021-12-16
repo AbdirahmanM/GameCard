@@ -8,7 +8,6 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
-import androidx.activity.viewModels
 import com.example.gamelb.api.models.Game
 import com.example.gamelb.db.*
 import com.google.android.flexbox.FlexboxLayout
@@ -44,8 +43,7 @@ class GameDetailActivity : AppCompatActivity() {
         genres.text = "${convertListOfObjectsToString(game.genres)}"
         Picasso.get().load(game.background_image).fit().centerCrop().into(img)
 
-        if (game.stores != null) {
-            game.stores.forEach { it ->
+        game.stores?.forEach { it ->
                 val dynamicButton = Button(this)
                 dynamicButton.layoutParams = LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -53,13 +51,16 @@ class GameDetailActivity : AppCompatActivity() {
                 )
                 dynamicButton.text = it.store.name
                 val domain = it.store.domain
-                dynamicButton.setOnClickListener {
-                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse("https://${domain}/"))
-                    startActivity(browserIntent)
+
+                if (domain != null) {
+                    dynamicButton.setOnClickListener {
+                        val browserIntent =
+                            Intent(Intent.ACTION_VIEW, Uri.parse("https://${domain}/"))
+                        startActivity(browserIntent)
+                    }
                 }
                 stores.addView(dynamicButton)
             }
-        }
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.game_detail_menu, menu)
@@ -77,8 +78,25 @@ class GameDetailActivity : AppCompatActivity() {
     }
 
     fun addGameToDb() {
-        val gameEntity: GameEntity = GameEntity(game.id,game.slug,game.name, game.released,
-        game.tba, game.background_image, game.rating,game.playtime)
+        val platforms: MutableList<PlatformEntity> =  mutableListOf()
+        val genres: MutableList<GenreEntity> = mutableListOf()
+        val stores: MutableList<StoreEntity> = mutableListOf()
+        game.parent_platforms.forEach{
+            platforms.add(PlatformEntity(it.platform.name))
+        }
+        game.genres.forEach{
+            genres.add(GenreEntity(it.name))
+        }
+        game.stores?.forEach{
+            if (it.store.domain != null){
+                stores.add(StoreEntity(it.store.name, it.store.domain))
+            }
+            else {
+                stores.add(StoreEntity(it.store.name, null))
+            }
+        }
+        val gameEntity = GameEntity(game.id,game.slug,game.name, game.released,
+        game.tba, game.background_image, game.rating,game.playtime, platforms,genres, stores)
         gameEntityViewModel.insert(gameEntity)
         Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
     }

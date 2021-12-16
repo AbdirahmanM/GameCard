@@ -71,7 +71,6 @@ class UpcomingGamesFragment : Fragment(R.layout.fragment_upcoming_games) {
                 val visibleItemCount = linearLayoutManager.childCount
                 val totalVisibleItemCount = linearLayoutManager.itemCount
                 val pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition()
-
                 if (pastVisibleItems + visibleItemCount >= totalVisibleItemCount){
                     // in case the next url is null don't fetch anything
                     if (nextUrl != null && nextUrl != prevUrl){

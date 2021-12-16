@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.gamelb.GameDBApplication
 import com.example.gamelb.R
 import com.example.gamelb.adapters.GameEntityAdapter
 import com.example.gamelb.db.*

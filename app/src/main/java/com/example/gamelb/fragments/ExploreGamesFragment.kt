@@ -63,11 +63,6 @@ class ExploreGamesFragment : Fragment(R.layout.fragment_explore_games) {
                 val visibleItemCount = linearLayoutManager.childCount
                 val totalVisibleItemCount = linearLayoutManager.itemCount
                 val pastVisibleItems = linearLayoutManager.findFirstVisibleItemPosition()
-
-                Log.d("visible", "$visibleItemCount")
-                Log.d("totalVisibleItemcount", "$totalVisibleItemCount")
-                Log.d("pastvisible", "$pastVisibleItems")
-
                 if (pastVisibleItems + visibleItemCount >= totalVisibleItemCount){
                     // in case the next url is null don't fetch anything
                     if (nextUrl != null && nextUrl != prevUrl){
