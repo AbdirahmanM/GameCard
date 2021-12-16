@@ -8,20 +8,21 @@ import android.net.Uri
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.*
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
 import com.google.android.flexbox.FlexboxLayout
 
 
 class GameDetailActivity : AppCompatActivity() {
 
-    lateinit var viewmodel: GameEntityViewModel
+    val gameEntityViewModel: GameEntityViewModel by viewModels {
+        GameEntityViewModelFactory((application as GameDBApplication).repository)
+    }
+
     lateinit var game: Game
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_detail)
-        viewmodel = ViewModelProvider(this).get(GameEntityViewModel::class.java)
         game = intent.getSerializableExtra("EXTRA_GAME") as Game
         setTitle(game.name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true);
@@ -72,9 +73,9 @@ class GameDetailActivity : AppCompatActivity() {
     }
 
     fun addGameToDb() {
-        val gameEntity: GameEntity = GameEntity(0, game.id,game.slug,game.name, game.released,
-        game.tba, game.background_image, game.rating, game.parent_platforms,game.stores,game.genres,game.playtime)
-        viewmodel.insert(gameEntity)
+        val gameEntity: GameEntity = GameEntity(game.id,game.slug,game.name, game.released,
+        game.tba, game.background_image, game.rating,game.playtime)
+        gameEntityViewModel.insert(gameEntity)
         Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
     }
 

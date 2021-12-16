@@ -3,7 +3,9 @@ package com.example.gamelb
 import android.os.Bundle
 import android.view.View
 import android.widget.ProgressBar
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,7 +19,11 @@ import androidx.recyclerview.widget.RecyclerView
  */
 class MyListFragment : Fragment(R.layout.fragment_my_list) {
 
-    lateinit var viewModel: GameEntityViewModel
+
+    val gameEntityViewModel: GameEntityViewModel by viewModels {
+        GameEntityViewModelFactory((activity?.applicationContext as GameDBApplication).repository)
+    }
+
     lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var progressBar: ProgressBar
 
@@ -36,10 +42,9 @@ class MyListFragment : Fragment(R.layout.fragment_my_list) {
             myAdapter.notifyDataSetChanged()
             progressBar.visibility = View.GONE
         }
-        // instantiate viewmodel
-        viewModel = ViewModelProvider(this).get(GameEntityViewModel::class.java)
+
         // observe the liveData
-        viewModel.games.observe(viewLifecycleOwner, gamesObserver)
+        gameEntityViewModel.games.observe(viewLifecycleOwner, gamesObserver)
 
     }
 }

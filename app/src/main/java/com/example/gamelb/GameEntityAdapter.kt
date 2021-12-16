@@ -29,17 +29,17 @@ class GameEntityAdapter(): RecyclerView.Adapter<GameEntityAdapter.MyViewHolder>(
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         var game: GameEntity = games.get(position)
         // convert game entity to game
-        var game2: Game = Game(game.game_id,game.slug,game.name, game.released,
-            game.tba, game.background_image, game.rating, game.parent_platforms,game.stores,game.genres,game.playtime)
+        //var game2: Game = Game(game.game_id,game.slug,game.name, game.released,
+          //  game.tba, game.background_image, game.rating,game.playtime)
         holder.title.text = game.name
         Picasso.get().load(game.background_image).fit().centerCrop().into(holder.img)
 
-        holder.cardView.setOnClickListener {
+        /*holder.cardView.setOnClickListener {
             val intent = Intent(it.context,GameDetailActivity::class.java)
             intent.putExtra("EXTRA_GAME", game2)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             it.context.startActivity(intent)
-        }
+        }*/
 
     }
 
