@@ -64,12 +64,21 @@ class GameDetailActivity : AppCompatActivity() {
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.game_detail_menu, menu)
+        if(checkDate(game.released)){
+            menu.findItem(R.id.addGameToWishlist).setVisible(true)
+            menu.findItem(R.id.addGameToCollection).setVisible(false)
+        }
+        else {
+            menu.findItem(R.id.addGameToWishlist).setVisible(false)
+            menu.findItem(R.id.addGameToCollection).setVisible(true)
+        }
+
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
-            R.id.saveGame -> {
+            R.id.addGameToCollection -> {
                 addGameToDb()
                 return true
             }
@@ -100,6 +109,5 @@ class GameDetailActivity : AppCompatActivity() {
         gameEntityViewModel.insert(gameEntity)
         Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
     }
-
 
 }

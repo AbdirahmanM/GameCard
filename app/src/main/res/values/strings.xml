@@ -4,6 +4,9 @@
     <string name="nav_close"> Close </string>
     <string name="explore">Explore</string>
     <string name="upcoming_games">Upcoming Games</string>
-    <string name="my_list">My List</string>
-    <string name="save_to_my_collection">Save to my collection</string>
+    <string name="my_list">My Collection</string>
+    <string name="save_to_my_collection">Add game to my collection</string>
+    <string name="add_game_to_wishlist">Add game to my wishlist</string>
+    <string name="remove_game">Remove the game from wishlist/collection</string>
+    <string name="my_wishlist">My Wishlist</string>
 </resources>

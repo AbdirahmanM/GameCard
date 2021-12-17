@@ -3,6 +3,8 @@ package com.example.gamelb
 import com.example.gamelb.api.models.Genre
 import com.example.gamelb.api.models.Platform
 import com.example.gamelb.api.models.Store
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun convertListOfObjectsToString(list: List<Any>): String{
     val object_names: MutableList<String> = mutableListOf()
@@ -21,4 +23,13 @@ fun formatDate(dateString: String): String {
     val months = mapOf("01" to "Januari", "02" to "Februari", "03" to "Maart", "04" to "April", "05" to "Mei", "06" to "Juni",
           "07" to "Juli", "08" to "Augustus", "09" to "September", "10" to "Oktober", "11" to "November", "12" to "December")
     return "${dateSplit[2].replaceFirst("0", "")} ${months.get(dateSplit[1])} ${dateSplit[0]}"
+}
+
+fun checkDate(dateString: String) : Boolean {
+    val format = SimpleDateFormat("yyyy-MM-dd")
+    val date = format.parse(dateString)
+    val currentDate = Calendar.getInstance()
+    val dateOfString = Calendar.getInstance()
+    dateOfString.time = date
+    return dateOfString.after(currentDate)
 }

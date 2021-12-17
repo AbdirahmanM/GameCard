@@ -3,14 +3,22 @@
 
     <item
         android:id="@+id/nav_explore_games"
+        android:icon="@drawable/ic_baseline_explore_24"
         android:title="@string/explore" />
 
     <item
         android:id="@+id/nav_upcoming_games"
+        android:icon="@drawable/ic_baseline_calendar_month_24"
         android:title="@string/upcoming_games" />
 
     <item
         android:id="@+id/nav_my_list"
+        android:icon="@drawable/ic_baseline_source_24"
         android:title="@string/my_list" />
+
+    <item
+        android:id="@+id/nav_my_wishlist"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/my_wishlist" />
 
 </menu>

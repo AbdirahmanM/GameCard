@@ -53,7 +53,7 @@ class GameEntityAdapter(): RecyclerView.Adapter<GameEntityAdapter.MyViewHolder>(
                 stores.add(StoreResponse(Store(it.name, null)))
             }
         }
-        var game2: Game = Game(game.game_id,game.slug,game.name, game.released,
+        var game2 = Game(game.game_id,game.slug,game.name, game.released,
           game.tba, game.background_image, game.rating,platforms, stores, genres, game.playtime)
         holder.title.text = game.name
         Picasso.get().load(game.background_image).fit().centerCrop().into(holder.img)

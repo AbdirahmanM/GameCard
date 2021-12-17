@@ -28,9 +28,19 @@ class UtilFunctionsTest {
 
     @Test
     fun formateDateTest(){
-        val date1: String = "2018-04-07"
-        val date2: String = "2009-06-23"
+        val date1 = "2018-04-07"
+        val date2 = "2009-06-23"
         assertEquals("7 April 2018", formatDate(date1))
         assertEquals("23 Juni 2009", formatDate(date2))
+    }
+
+    @Test
+    fun checkDate(){
+        val date1 = "2018-04-07"
+        val date2 = "2009-06-23"
+        val date3 = "2022-08-02"
+        assertEquals(checkDate(date1), false)
+        assertEquals(checkDate(date2), false)
+        assertEquals(checkDate(date3), true)
     }
 }
