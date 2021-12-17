@@ -17,5 +17,6 @@
        android:id="@+id/removeGame"
        android:icon="@drawable/ic_baseline_delete_24"
        android:title="@string/remove_game"
+       android:visible="false"
        app:showAsAction="always"/>
 </menu>

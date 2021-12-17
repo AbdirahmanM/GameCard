@@ -11,6 +11,9 @@ import android.widget.*
 import com.example.gamelb.api.models.Game
 import com.example.gamelb.db.*
 import com.google.android.flexbox.FlexboxLayout
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class GameDetailActivity : AppCompatActivity() {
@@ -72,7 +75,12 @@ class GameDetailActivity : AppCompatActivity() {
             menu.findItem(R.id.addGameToWishlist).setVisible(false)
             menu.findItem(R.id.addGameToCollection).setVisible(true)
         }
-
+        CoroutineScope(Dispatchers.IO).launch {
+            val answer = repository.exists(game.id)
+            if (answer){
+                menu.findItem(R.id.removeGame).setVisible(true)
+            }
+        }
         return true
     }
 

@@ -13,4 +13,7 @@ interface GameEntityDAO {
 
     @Delete
     suspend fun delete(gameEntity: GameEntity)
+
+    @Query("SELECT EXISTS (SELECT 1 FROM games WHERE game_id = :id)")
+    fun exists(id: Int): Boolean
 }

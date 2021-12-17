@@ -15,4 +15,8 @@ class GameEntityRepository(private val gameEntityDAO: GameEntityDAO) {
     suspend fun insert(gameEntity: GameEntity) {
         gameEntityDAO.addGame(gameEntity)
     }
+
+    suspend fun exists(id: Int): Boolean {
+        return gameEntityDAO.exists(id)
+    }
 }

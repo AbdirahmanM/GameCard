@@ -14,12 +14,6 @@ import com.example.gamelb.api.GameHandler
 import com.example.gamelb.api.models.Game
 import com.example.gamelb.adapters.GameAdapter
 
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ExploreGamesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ExploreGamesFragment : Fragment(R.layout.fragment_explore_games) {
 
     lateinit var progressBar: ProgressBar

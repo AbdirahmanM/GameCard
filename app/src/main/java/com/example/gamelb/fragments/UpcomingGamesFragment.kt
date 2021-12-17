@@ -16,11 +16,7 @@ import com.example.gamelb.adapters.GameAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [UpcomingGamesFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class UpcomingGamesFragment : Fragment(R.layout.fragment_upcoming_games) {
     lateinit var progressBar: ProgressBar
     lateinit var linearLayoutManager: LinearLayoutManager

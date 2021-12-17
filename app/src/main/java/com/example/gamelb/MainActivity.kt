@@ -6,7 +6,8 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.gamelb.fragments.ExploreGamesFragment
-import com.example.gamelb.fragments.MyListFragment
+import com.example.gamelb.fragments.MyCollectionFragment
+import com.example.gamelb.fragments.MyWishlistFragment
 import com.example.gamelb.fragments.UpcomingGamesFragment
 import com.google.android.material.navigation.NavigationView
 
@@ -27,7 +28,8 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         val exploreGamesFragment = ExploreGamesFragment()
         val upcomingGamesFragment = UpcomingGamesFragment()
-        val myListFragment = MyListFragment()
+        val myListFragment = MyCollectionFragment()
+        val myWishlistFragment = MyWishlistFragment()
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.nav_upcoming_games -> supportFragmentManager.beginTransaction().apply {
@@ -46,6 +48,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.nav_my_list -> supportFragmentManager.beginTransaction().apply {
                     setMenuItemAsChecked(it.itemId)
                     replace(R.id.flFragment, myListFragment)
+                    commit()
+                    drawerLayout.closeDrawers()
+                }
+                R.id.nav_my_wishlist -> supportFragmentManager.beginTransaction().apply {
+                    setMenuItemAsChecked(it.itemId)
+                    replace(R.id.flFragment, myWishlistFragment)
                     commit()
                     drawerLayout.closeDrawers()
                 }
@@ -68,16 +76,25 @@ class MainActivity : AppCompatActivity() {
                 navigationView.menu.findItem(R.id.nav_explore_games).isChecked = true
                 navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = false
                 navigationView.menu.findItem(R.id.nav_my_list).isChecked = false
+                navigationView.menu.findItem(R.id.nav_my_wishlist).isChecked = false
             }
             R.id.nav_upcoming_games -> {
                 navigationView.menu.findItem(R.id.nav_explore_games).isChecked = false
                 navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = true
                 navigationView.menu.findItem(R.id.nav_my_list).isChecked = false
+                navigationView.menu.findItem(R.id.nav_my_wishlist).isChecked = false
             }
             R.id.nav_my_list -> {
                 navigationView.menu.findItem(R.id.nav_explore_games).isChecked = false
                 navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = false
                 navigationView.menu.findItem(R.id.nav_my_list).isChecked = true
+                navigationView.menu.findItem(R.id.nav_my_wishlist).isChecked = false
+            }
+            R.id.nav_my_wishlist -> {
+                navigationView.menu.findItem(R.id.nav_explore_games).isChecked = false
+                navigationView.menu.findItem(R.id.nav_upcoming_games).isChecked = false
+                navigationView.menu.findItem(R.id.nav_my_list).isChecked = false
+                navigationView.menu.findItem(R.id.nav_my_wishlist).isChecked = true
             }
         }
     }
