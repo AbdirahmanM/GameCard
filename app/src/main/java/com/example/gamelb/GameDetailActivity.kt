@@ -14,6 +14,7 @@ import com.google.android.flexbox.FlexboxLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.concurrent.fixedRateTimer
 
 
 class GameDetailActivity : AppCompatActivity() {
@@ -78,7 +79,14 @@ class GameDetailActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val answer = repository.exists(game.id)
             if (answer){
-                menu.findItem(R.id.removeGame).setVisible(true)
+                CoroutineScope(Dispatchers.Main).launch {
+                    menu.findItem(R.id.removeGame).setVisible(true)
+                    if (checkDate(game.released)) {
+                        menu.findItem(R.id.addGameToWishlist).setVisible(false)
+                    } else {
+                        menu.findItem(R.id.addGameToCollection).setVisible(false)
+                    }
+                }
             }
         }
         return true
@@ -87,14 +95,40 @@ class GameDetailActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId){
             R.id.addGameToCollection -> {
-                addGameToDb()
+                addGameToCollection()
                 return true
+            }
+            R.id.addGameToWishlist -> {
+                addGameToWishlist()
+                true
+            }
+            R.id.removeGame -> {
+                deleteGameFromDB()
+                true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
 
-    fun addGameToDb() {
+    fun deleteGameFromDB(){
+        val gameEntity = fillGameEntity()
+        gameEntityViewModel.delete(gameEntity)
+        Toast.makeText(this, "Succesfully removed game", Toast.LENGTH_LONG).show()
+    }
+
+    fun addGameToCollection() {
+        val gameEntity = fillGameEntity()
+        gameEntityViewModel.insert(gameEntity)
+        Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
+    }
+
+    fun addGameToWishlist(){
+        val gameEntity = fillGameEntity()
+        gameEntityViewModel.insert(gameEntity)
+        Toast.makeText(this, "Succesfully added the game to your wishlist", Toast.LENGTH_LONG).show()
+    }
+
+    fun fillGameEntity(): GameEntity {
         val platforms: MutableList<PlatformEntity> =  mutableListOf()
         val genres: MutableList<GenreEntity> = mutableListOf()
         val stores: MutableList<StoreEntity> = mutableListOf()
@@ -112,10 +146,8 @@ class GameDetailActivity : AppCompatActivity() {
                 stores.add(StoreEntity(it.store.name, null))
             }
         }
-        val gameEntity = GameEntity(game.id,game.slug,game.name, game.released,
-        game.tba, game.background_image, game.rating,game.playtime, platforms,genres, stores)
-        gameEntityViewModel.insert(gameEntity)
-        Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
+        return GameEntity(game.id,game.slug,game.name, game.released,
+            game.tba, game.background_image, game.rating,game.playtime, platforms,genres, stores)
     }
 
 }

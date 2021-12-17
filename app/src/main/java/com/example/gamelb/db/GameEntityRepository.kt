@@ -16,7 +16,17 @@ class GameEntityRepository(private val gameEntityDAO: GameEntityDAO) {
         gameEntityDAO.addGame(gameEntity)
     }
 
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
     suspend fun exists(id: Int): Boolean {
         return gameEntityDAO.exists(id)
     }
+
+    @Suppress("RedundantSuspendModifier")
+    @WorkerThread
+    suspend fun delete(gameEntity: GameEntity){
+        return gameEntityDAO.delete(gameEntity)
+    }
+
+
 }

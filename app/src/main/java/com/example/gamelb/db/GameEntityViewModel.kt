@@ -16,4 +16,8 @@ class GameEntityViewModel(private val repository: GameEntityRepository) : ViewMo
     fun insert(game: GameEntity) = viewModelScope.launch {
         repository.insert(game)
     }
+
+    fun delete(game: GameEntity) = viewModelScope.launch {
+        repository.delete(game)
+    }
 }
