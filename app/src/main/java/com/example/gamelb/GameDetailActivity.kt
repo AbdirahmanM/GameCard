@@ -14,7 +14,6 @@ import com.google.android.flexbox.FlexboxLayout
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.concurrent.fixedRateTimer
 
 
 class GameDetailActivity : AppCompatActivity() {
@@ -32,7 +31,8 @@ class GameDetailActivity : AppCompatActivity() {
         gameEntityViewModel = GameEntityViewModel(repository)
         game = intent.getSerializableExtra("EXTRA_GAME") as Game
         setTitle(game.name)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true);
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportFragmentManager
         val released: TextView = findViewById(R.id.released)
         val rating: TextView = findViewById(R.id.rating)
         val img: ImageView = findViewById(R.id.img)
@@ -112,20 +112,26 @@ class GameDetailActivity : AppCompatActivity() {
 
     fun deleteGameFromDB(){
         val gameEntity = fillGameEntity()
+        val isNotReleased = checkDate(gameEntity.released)
         gameEntityViewModel.delete(gameEntity)
-        Toast.makeText(this, "Succesfully removed game", Toast.LENGTH_LONG).show()
+        if (isNotReleased){
+            Toast.makeText(this, this.getString(R.string.message_game_removed_wishlist), Toast.LENGTH_LONG).show()
+        }
+        else {
+            Toast.makeText(this, this.getString(R.string.message_game_removed), Toast.LENGTH_LONG).show()
+        }
     }
 
     fun addGameToCollection() {
         val gameEntity = fillGameEntity()
         gameEntityViewModel.insert(gameEntity)
-        Toast.makeText(this, "Succesfully added the game to your collection", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, this.getString(R.string.message_game_added), Toast.LENGTH_LONG).show()
     }
 
     fun addGameToWishlist(){
         val gameEntity = fillGameEntity()
         gameEntityViewModel.insert(gameEntity)
-        Toast.makeText(this, "Succesfully added the game to your wishlist", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, this.getString(R.string.message_game_added_wishlist), Toast.LENGTH_LONG).show()
     }
 
     fun fillGameEntity(): GameEntity {

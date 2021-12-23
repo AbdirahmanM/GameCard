@@ -10,6 +10,11 @@ import com.example.gamelb.fragments.MyCollectionFragment
 import com.example.gamelb.fragments.MyWishlistFragment
 import com.example.gamelb.fragments.UpcomingGamesFragment
 import com.google.android.material.navigation.NavigationView
+import android.content.Intent
+import android.app.ActivityManager
+import android.content.Context
+import android.util.Log
+
 
 class MainActivity : AppCompatActivity() {
 

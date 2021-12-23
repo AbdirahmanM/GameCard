@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Gamelb</string>
+    <string name="nav_open"> Open </string>
+    <string name="nav_close"> Sluit </string>
+    <string name="explore"> Ontdek </string>
+    <string name="upcoming_games">Aankomende games</string>
+    <string name="my_list">Mijn collectie</string>
+    <string name="save_to_my_collection">Voeg game toe aan mijn collectie</string>
+    <string name="add_game_to_wishlist">Voeg game toe aan mijn verlanglijst</string>
+    <string name="remove_game">Verwijder de game van mijn verlanglijst/collectie</string>
+    <string name="my_wishlist">Mijn verlanglijst</string>
+    <string name="message_game_added"> De game is toegevoegd aan jouw collectie </string>
+    <string name="message_game_added_wishlist"> De game is toegevoegd aan jouw verlanglijst </string>
+    <string name="message_game_removed"> De game is verwijderd van jouw collectie </string>
+    <string name="message_game_removed_wishlist"> De game is verwijderd van jouw verlanglijst </string>
+</resources>

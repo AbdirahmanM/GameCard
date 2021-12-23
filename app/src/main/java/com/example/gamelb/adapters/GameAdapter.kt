@@ -23,7 +23,6 @@ class GameAdapter(): RecyclerView.Adapter<GameAdapter.MyViewHolder>() {
         val cardView: CardView = v.findViewById(R.id.cardView)
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val  view = LayoutInflater.from(parent.context).inflate(R.layout.recyclerview_explore_games, parent, false)
         return MyViewHolder(view)
