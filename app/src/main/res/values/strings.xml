@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Gamelb</string>
+    <string name="app_name">GameCard</string>
     <string name="nav_open"> Open </string>
     <string name="nav_close"> Close </string>
     <string name="explore">Explore</string>
